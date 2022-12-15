@@ -3,16 +3,20 @@ package com.uniksoft.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uniksoft.entity.Student;
 import com.uniksoft.request.CreateStudentRequest;
+import com.uniksoft.request.UpdateStudentRequest;
 import com.uniksoft.response.StudentResponse;
 import com.uniksoft.service.StudentService;
 
@@ -21,7 +25,7 @@ import com.uniksoft.service.StudentService;
 public class StudentController {
 	
 	@Autowired
-	StudentService studenService;
+	StudentService studentService;
 	
 	@Value("${app.name:Default Demo App}")
 	private String appName;
@@ -34,7 +38,7 @@ public class StudentController {
 	
 	@GetMapping("getAllStudents")
 	public List<StudentResponse> getAllStudents() {
-		List<Student> studentList = studenService.getAllStudents();
+		List<Student> studentList = studentService.getAllStudents();
 		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
 		
 		// It's not a good idea to expose an entity to the web
@@ -46,8 +50,16 @@ public class StudentController {
 	}
 	
 	@PostMapping("create")
-	public StudentResponse createStudent(@RequestBody CreateStudentRequest createStudentRequest) {
-		Student student = studenService.createStudent(createStudentRequest);
+	public StudentResponse createStudent(@Valid @RequestBody CreateStudentRequest createStudentRequest) {
+		Student student = studentService.createStudent(createStudentRequest);
+		
+		return new StudentResponse(student);
+	}
+	
+	@PutMapping("update")
+	public StudentResponse updateStudent(@Valid @RequestBody UpdateStudentRequest updateStudentRequest) {
+		
+		Student student = studentService.updateStudent(updateStudentRequest);
 		
 		return new StudentResponse(student);
 	}
