@@ -34,6 +34,7 @@ public class StudentController {
 		List<Student> studentList = studenService.getAllStudents();
 		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
 		
+		// It's not a good idea to expose an entity to the web
 		studentList.stream().forEach(student -> {
 			studentResponseList.add(new StudentResponse(student));
 		});
