@@ -7,11 +7,14 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uniksoft.entity.Student;
@@ -62,5 +65,17 @@ public class StudentController {
 		Student student = studentService.updateStudent(updateStudentRequest);
 		
 		return new StudentResponse(student);
+	}
+	
+	// http:8080/api/student/delete?id=4
+//	@DeleteMapping("delete")
+//	public String deleteStudent(@RequestParam("id") long id) {
+//		return studentService.deleteStudent(id);
+//	}
+	
+	// http:localhost:8080/api/student/delete/4
+	@DeleteMapping("delete/{id}")
+	public String deleteStudent(@PathVariable("id") long id) {
+		return studentService.deleteStudent(id);
 	}
 }

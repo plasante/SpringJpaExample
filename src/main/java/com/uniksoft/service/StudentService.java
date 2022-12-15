@@ -28,6 +28,11 @@ public class StudentService {
 		return student;
 	}
 	
+	public String deleteStudent(long id) {
+		studentRepository.deleteById(id);
+		return "Student has been deleted successfully";
+	}
+	
 	public Student updateStudent(UpdateStudentRequest updateStudentRequest) {
 		Student student = studentRepository.findById(updateStudentRequest.getId()).get();
 		
