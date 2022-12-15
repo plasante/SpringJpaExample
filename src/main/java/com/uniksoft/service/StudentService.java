@@ -56,4 +56,8 @@ public class StudentService {
 	public List<Student> getByFirstName(String firstName) {
 		return studentRepository.findByFirstName(firstName);
 	}
+	
+	public Student getByFirstNameAndLastName(String firstName, String lastName) {
+		return studentRepository.findByFirstNameAndLastName(firstName, lastName);
+	}
 }
