@@ -78,4 +78,19 @@ public class StudentController {
 	public String deleteStudent(@PathVariable("id") long id) {
 		return studentService.deleteStudent(id);
 	}
+	
+	@GetMapping("getByFirstName/{firstName}")
+	public List<StudentResponse> getByFirstName(@PathVariable String firstName) {
+		List<Student> studentList = studentService.getByFirstName(firstName);
+		
+		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+		
+		// It's not a good idea to expose an entity to the web
+		studentList.stream().forEach(student -> {
+			studentResponseList.add(new StudentResponse(student));
+		});
+		
+		return studentResponseList;
+		
+	}
 }

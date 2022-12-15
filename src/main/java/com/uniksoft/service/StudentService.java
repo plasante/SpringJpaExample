@@ -52,4 +52,8 @@ public class StudentService {
 		
 		return student;
 	}
+	
+	public List<Student> getByFirstName(String firstName) {
+		return studentRepository.findByFirstName(firstName);
+	}
 }
