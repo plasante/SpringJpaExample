@@ -23,16 +23,17 @@ public class StudentResponse {
 	private String email;
 
 	public StudentResponse(Student student) {
-		//this.id = student.getId();
+		this.id = student.getId();
 		this.firstName = student.getFirstName();
 		this.lastName = student.getLastName();
 		this.email = student.getEmail();
 	}
 
-	public StudentResponse(int id, String firstName, String lastName) {
+	public StudentResponse(long id, String firstName, String lastName) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.uniksoft.entity.Student;
 import com.uniksoft.repository.StudentRepository;
+import com.uniksoft.request.CreateStudentRequest;
 
 @Service
 public class StudentService {
@@ -16,5 +17,13 @@ public class StudentService {
 	
 	public List<Student> getAllStudents() {
 		return studentRepository.findAll();
+	}
+	
+	public Student createStudent(CreateStudentRequest createStudentRequest) {
+		Student student = new Student(createStudentRequest);
+		
+		student = studentRepository.save(student);
+		
+		return student;
 	}
 }

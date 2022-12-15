@@ -6,10 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uniksoft.entity.Student;
+import com.uniksoft.request.CreateStudentRequest;
 import com.uniksoft.response.StudentResponse;
 import com.uniksoft.service.StudentService;
 
@@ -23,7 +26,7 @@ public class StudentController {
 	@Value("${app.name:Default Demo App}")
 	private String appName;
 
-	@GetMapping("/get")
+	@GetMapping("get")
 	public StudentResponse getStudent() {
 		StudentResponse studentResponse = new StudentResponse(1, "Pierre", "Lasante");
 		return studentResponse;
@@ -40,5 +43,12 @@ public class StudentController {
 		});
 		
 		return studentResponseList;
+	}
+	
+	@PostMapping("create")
+	public StudentResponse createStudent(@RequestBody CreateStudentRequest createStudentRequest) {
+		Student student = studenService.createStudent(createStudentRequest);
+		
+		return new StudentResponse(student);
 	}
 }
