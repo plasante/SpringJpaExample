@@ -98,4 +98,18 @@ public class StudentController {
 	public StudentResponse getByFirstNameAndLastName(@PathVariable String firstName, @PathVariable String lastName) {
 		return new StudentResponse(studentService.getByFirstNameAndLastName(firstName, lastName));
 	}
+	
+	@GetMapping("getByFirstNameOrLastName/{firstName}/{lastName}")
+	public List<StudentResponse> getByFirstNameOrLastName(@PathVariable String firstName, @PathVariable String lastName) {
+		List<Student> students = studentService.getByFirstNameOrLastName(firstName, lastName);
+		
+		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+		
+		// It's not a good idea to expose an entity to the web
+		students.stream().forEach(student -> {
+			studentResponseList.add(new StudentResponse(student));
+		});
+		
+		return studentResponseList;
+	}
 }
