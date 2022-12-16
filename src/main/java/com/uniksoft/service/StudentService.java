@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.uniksoft.entity.Student;
 import com.uniksoft.repository.StudentRepository;
 import com.uniksoft.request.CreateStudentRequest;
+import com.uniksoft.request.InQueryRequest;
 import com.uniksoft.request.UpdateStudentRequest;
 
 @Service
@@ -63,5 +64,9 @@ public class StudentService {
 	
 	public List<Student> getByFirstNameOrLastName(String firstName, String lastName) {
 		return studentRepository.findByFirstNameOrLastName(firstName, lastName);
+	}
+
+	public List<Student> getByFirstNameIn(InQueryRequest inQueryRequest) {
+		return studentRepository.findByFirstNameIn(inQueryRequest.getFirstNames());
 	}
 }
