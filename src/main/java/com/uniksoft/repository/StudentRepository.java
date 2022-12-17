@@ -3,9 +3,11 @@ package com.uniksoft.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.uniksoft.entity.Student;
 
@@ -27,5 +29,10 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 	@Query("From Student where firstName = :firstName and lastName = :lastName")
 	//@Query("From Student where firstName = ?1 and lastName = ?2")  Not Recommended
 	Student getByFirstNameAndLastName(String firstName, String lastName);
+	
+	@Modifying
+	@Transactional
+	@Query("Update Student set firstName = :firstName where id = :id")
+	Integer updateFirstName(Long id, String firstName);
 	
 }
