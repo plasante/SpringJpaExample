@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.uniksoft.entity.Student;
@@ -77,5 +78,11 @@ public class StudentService {
 		
 		return studentRepository.findAll(pageable).getContent();
 		
+	}
+
+	public List<Student> getAllStudentsWithSorting() {
+		Sort sort = Sort.by(Sort.Direction.ASC, "lastName", "email");
+		
+		return studentRepository.findAll(sort);
 	}
 }
