@@ -183,4 +183,9 @@ public class StudentController {
 	public String updateStudentWithJpql(@PathVariable Long id, @PathVariable String firstName) {
 		return studentService.updateStudentWithJpql(id, firstName) + " Student(s) updated";
 	}
+	
+	@DeleteMapping("deleteByFirstName/{firstName}")
+	public String deleteStudentWithJpql(@PathVariable String firstName) {
+		return studentService.deleteStudent(firstName) + " Students(s) deleted";
+	}
 }
