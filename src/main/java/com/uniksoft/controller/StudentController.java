@@ -139,6 +139,19 @@ public class StudentController {
 		return studentResponseList;
 	}
 	
+	@GetMapping("startsWith/{firstName}")
+	public List<StudentResponse> startsWith(@PathVariable String firstName) {
+		List<Student> studentList = studentService.startsWith(firstName);
+		
+		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+		
+		studentList.stream().forEach(student -> {
+			studentResponseList.add(new StudentResponse(student));
+		});
+		
+		return studentResponseList;
+	}
+	
 	@GetMapping("getAllWithPagination")
 	public List<StudentResponse> getAllStudentsWithPagination(@RequestParam int pageNo, @RequestParam int pageSize) {
 		List<Student> studentList = studentService.getAllStudentWithPagination(pageNo, pageSize);
