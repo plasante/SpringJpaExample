@@ -3,6 +3,8 @@ package com.uniksoft.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.uniksoft.entity.Student;
@@ -21,5 +23,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 	List<Student> findByFirstNameContains(String firstName);
 
 	List<Student> findByFirstNameStartsWith(String firstName);
+	
+	@Query("From Student where firstName = :firstName and lastName = :lastName")
+	//@Query("From Student where firstName = ?1 and lastName = ?2")  Not Recommended
+	Student getByFirstNameAndLastName(String firstName, String lastName);
 	
 }
