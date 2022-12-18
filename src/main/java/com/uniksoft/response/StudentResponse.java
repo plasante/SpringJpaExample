@@ -22,6 +22,10 @@ public class StudentResponse {
 	
 	private String email;
 	
+	private String street;
+	
+	private String city;
+	
 	private String fullName;
 
 	public StudentResponse(Student student) {
@@ -30,6 +34,9 @@ public class StudentResponse {
 		this.lastName = student.getLastName();
 		this.email = student.getEmail();
 		this.fullName = student.getFirstName() + " " + student.getLastName();
+		
+		this.street = student.getAddress().getStreet();
+		this.city = student.getAddress().getCity();
 	}
 
 	public StudentResponse(long id, String firstName, String lastName) {

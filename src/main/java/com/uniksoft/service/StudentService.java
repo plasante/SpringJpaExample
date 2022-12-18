@@ -8,7 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.uniksoft.entity.Address;
 import com.uniksoft.entity.Student;
+import com.uniksoft.repository.AddressRepository;
 import com.uniksoft.repository.StudentRepository;
 import com.uniksoft.request.CreateStudentRequest;
 import com.uniksoft.request.InQueryRequest;
@@ -20,12 +22,23 @@ public class StudentService {
 	@Autowired
 	StudentRepository studentRepository;
 	
+	@Autowired
+	AddressRepository addressRepository;
+	
 	public List<Student> getAllStudents() {
 		return studentRepository.findAll();
 	}
 	
 	public Student createStudent(CreateStudentRequest createStudentRequest) {
 		Student student = new Student(createStudentRequest);
+		
+		Address address = new Address();
+		address.setStreet(createStudentRequest.getStreet());
+		address.setCity(createStudentRequest.getCity());
+		
+		address = addressRepository.save(address);
+		
+		student.setAddress(address);
 		
 		student = studentRepository.save(student);
 		
