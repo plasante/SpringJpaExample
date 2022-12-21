@@ -40,4 +40,12 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 	@Query("Delete From Student where firstName = :firstName")
 	Integer deleteByFirstName(String firstName);
 	
+	//*** Go for Method proxy as much as possible
+	// JPA Method proxy
+	List<Student> findByAddressCity(String city);
+	
+	// JPQL
+	@Query("From Student where address.city = :city")
+	List<Student> getByAddressCity(String city);
+	
 }

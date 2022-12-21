@@ -179,6 +179,19 @@ public class StudentController {
 		return studentResponseList;
 	}
 	
+	@GetMapping("/getByCity/{city}")
+	public List<StudentResponse> getByCity(@PathVariable String city) {
+		List<Student> students = studentService.getByCity(city);
+		
+		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+		
+		students.stream().forEach(student -> {
+			studentResponseList.add(new StudentResponse(student));
+		});
+		
+		return studentResponseList;
+	}
+	
 	@PutMapping("updateFirstName/{id}/{firstName}")
 	public String updateStudentWithJpql(@PathVariable Long id, @PathVariable String firstName) {
 		return studentService.updateStudentWithJpql(id, firstName) + " Student(s) updated";
