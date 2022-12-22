@@ -1,7 +1,12 @@
 package com.uniksoft.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.uniksoft.entity.Subject;
+import com.uniksoft.repository.SubjectRepository;
+import com.uniksoft.request.CreateSubjectRequest;
+import org.hibernate.mapping.Subclass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +29,9 @@ public class StudentService {
 	
 	@Autowired
 	AddressRepository addressRepository;
+
+	@Autowired
+	SubjectRepository subjectRepository;
 	
 	public List<Student> getAllStudents() {
 		return studentRepository.findAll();
@@ -41,7 +49,24 @@ public class StudentService {
 		student.setAddress(address);
 		
 		student = studentRepository.save(student);
-		
+
+		List<Subject> subjectList = new ArrayList<>();
+
+		if (createStudentRequest.getSubjectsLearning() != null) {
+			for (CreateSubjectRequest createSubjectRequest : createStudentRequest.getSubjectsLearning()) {
+				Subject subject = new Subject();
+				subject.setSubjectName(createSubjectRequest.getSubjectName());
+				subject.setMarksObtained(createSubjectRequest.getMarksObtained());
+				subject.setStudent(student);
+
+				subjectList.add(subject);
+			}
+
+			subjectRepository.saveAll(subjectList);
+		}
+
+		student.setLearningSubjects(subjectList);
+
 		return student;
 	}
 	

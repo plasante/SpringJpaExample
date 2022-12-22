@@ -1,15 +1,6 @@
 package com.uniksoft.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import com.uniksoft.request.CreateStudentRequest;
 
@@ -17,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter @Setter
 @AllArgsConstructor
@@ -44,6 +37,10 @@ public class Student {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "address_id")
 	private Address address;
+
+	// need to provide mappedBy attribute on the non-owning side
+	@OneToMany(mappedBy = "student")
+	private List<Subject> learningSubjects;
 	
 	@Transient
 	private String fullName;

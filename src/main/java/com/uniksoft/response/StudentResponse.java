@@ -4,11 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.uniksoft.entity.Student;
 
+import com.uniksoft.entity.Subject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter @Getter
 public class StudentResponse {
@@ -28,6 +32,8 @@ public class StudentResponse {
 	
 	private String fullName;
 
+	private List<SubjectResponse> learningSubjects;
+
 	public StudentResponse(Student student) {
 		this.id = student.getId();
 		this.firstName = student.getFirstName();
@@ -37,6 +43,13 @@ public class StudentResponse {
 		
 		this.street = student.getAddress().getStreet();
 		this.city = student.getAddress().getCity();
+
+		if(student.getLearningSubjects() != null) {
+			learningSubjects = new ArrayList<SubjectResponse>();
+			for (Subject subject : student.getLearningSubjects()) {
+				learningSubjects.add(new SubjectResponse(subject));
+			}
+		}
 	}
 
 	public StudentResponse(long id, String firstName, String lastName) {
