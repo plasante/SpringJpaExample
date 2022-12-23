@@ -5,16 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.uniksoft.entity.Student;
 
 import com.uniksoft.entity.Subject;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Setter @Getter
+@ToString
 public class StudentResponse {
 
 	private long id;
