@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +29,11 @@ import com.uniksoft.service.StudentService;
 @RestController
 @RequestMapping("/api/student/")
 public class StudentController {
-	
+
+	// Error < Warn < Info < Debug < Trace
+
+	Logger logger = LoggerFactory.getLogger(StudentController.class);
+
 	@Autowired
 	StudentService studentService;
 	
@@ -42,6 +48,13 @@ public class StudentController {
 	
 	@GetMapping("getAllStudents")
 	public List<StudentResponse> getAllStudents() {
+
+		logger.error("Inside Error");
+		logger.warn("Inside Warning");
+		logger.info("Inside Info");
+		logger.debug("Inside Debug");
+		logger.trace("Inside Trace");
+
 		List<Student> studentList = studentService.getAllStudents();
 		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
 		
