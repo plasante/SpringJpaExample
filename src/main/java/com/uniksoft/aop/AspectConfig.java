@@ -2,6 +2,7 @@ package com.uniksoft.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -24,8 +25,13 @@ public class AspectConfig {
 //        logger.info("Request = " + object);
 //    }
 
-    @After(value = "execution(* com.uniksoft.controller.*.*(..)) and args(object)")
-    public void beforeAdvice(JoinPoint joinPoint, Object object) {
-        logger.info("Request = " + object);
+//    @After(value = "execution(* com.uniksoft.controller.*.*(..)) and args(object)")
+//    public void beforeAdvice(JoinPoint joinPoint, Object object) {
+//        logger.info("Request = " + object);
+//    }
+
+    @AfterReturning(value = "execution(* com.uniksoft.controller.*.*(..)) and args(object)", returning = "returningObject")
+    public void beforeAdvice(JoinPoint joinPoint, Object object, Object returningObject) {
+        logger.info("Response = " + returningObject);
     }
 }
