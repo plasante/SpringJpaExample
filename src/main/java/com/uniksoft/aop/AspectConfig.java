@@ -1,6 +1,7 @@
 package com.uniksoft.aop;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -18,7 +19,12 @@ public class AspectConfig {
 //        logger.info("Inside Before Advice");
 //    }
 
-    @Before(value = "execution(* com.uniksoft.controller.*.*(..)) and args(object)")
+//    @Before(value = "execution(* com.uniksoft.controller.*.*(..)) and args(object)")
+//    public void beforeAdvice(JoinPoint joinPoint, Object object) {
+//        logger.info("Request = " + object);
+//    }
+
+    @After(value = "execution(* com.uniksoft.controller.*.*(..)) and args(object)")
     public void beforeAdvice(JoinPoint joinPoint, Object object) {
         logger.info("Request = " + object);
     }
