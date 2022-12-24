@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"com.uniksoft.controller", "com.uniksoft.service"})
+@ComponentScan({"com.uniksoft.controller", "com.uniksoft.service", "com.uniksoft.aop"})
 @EntityScan("com.uniksoft.entity")
 @EnableJpaRepositories("com.uniksoft.repository")
 //@EnableSwagger2
