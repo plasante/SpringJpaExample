@@ -13,8 +13,13 @@ public class AspectConfig {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Before(value = "execution(* com.uniksoft.controller.*.*(..))")
-    public void beforeAdvice(JoinPoint joinPoint) {
-        logger.info("Inside Before Advice");
+//    @Before(value = "execution(* com.uniksoft.controller.*.*(..))")
+//    public void beforeAdvice(JoinPoint joinPoint) {
+//        logger.info("Inside Before Advice");
+//    }
+
+    @Before(value = "execution(* com.uniksoft.controller.*.*(..)) and args(object)")
+    public void beforeAdvice(JoinPoint joinPoint, Object object) {
+        logger.info("Request = " + object);
     }
 }
