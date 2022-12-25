@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan({"com.uniksoft.controller", "com.uniksoft.service", "com.uniksoft.aop"})
 @EntityScan("com.uniksoft.entity")
 @EnableJpaRepositories("com.uniksoft.repository")
-@EnableScheduling
+//@EnableScheduling
 //@EnableSwagger2
 public class DemoApplication {
 
